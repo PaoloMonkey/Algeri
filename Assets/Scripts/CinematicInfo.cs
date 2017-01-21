@@ -14,6 +14,7 @@ public class CinematicInfo : object
 
     // public camera movement
     public GameManager.Actor actor;
+    public GameManager.Location toLocation;
     public Transform actorTransform;
     public Transform startPosition;
     public AudioSource audioSource;
@@ -26,12 +27,7 @@ public class CinematicInfo : object
 
     public void StartAnimation(Camera cam)
     {
-        if(actorTransform != null)
-            actorTransform.position = startPosition.position;
-        if (animator != null)
-        {
-            animator.SetTrigger(trigger);
-        }
+        
         if (splineController != null)
         {
             Transform camParent = cam.transform.parent.transform;
