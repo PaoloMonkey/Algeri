@@ -23,7 +23,7 @@ public class InteractionManager : MonoBehaviour {
             if(value == true)
             {
                 fixedPos = mainCamera.transform.position;
-                fixedRot = mainCamera.transform.localEulerAngles;
+                fixedRot = mainCamera.transform.rotation.eulerAngles;
             }
         }
         get
@@ -63,13 +63,13 @@ public class InteractionManager : MonoBehaviour {
             newPos.y = fixedPos.y + cameraPan.y * (mousePosition.y - screenSize.y / 2) / screenSize.y;
 
             // change camera pos/rotation
-            mainCamera.transform.position = newPos;
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, newPos, 0.1f);
 
             Vector3 newRot = fixedRot;
             newRot.y = fixedRot.y + cameraRotation.x * (mousePosition.x - screenSize.x / 2) / screenSize.x;
             newRot.x = fixedRot.x - cameraRotation.y * (mousePosition.y - screenSize.y / 2) / screenSize.y;
 
-            mainCamera.transform.localEulerAngles = newRot;
+            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, Quaternion.Euler(newRot), 0.1f);
         }
 
         bool isSelectingInteraction = false;
@@ -102,8 +102,7 @@ public class InteractionManager : MonoBehaviour {
 
         if(Input.GetMouseButtonUp(0) && currentProp != null)
         {
-            canInteract = false;
-            cameraPanEnabled = false;
+       //     canInteract = false;
             gameManager.PlayCinematic(currentProp.cinematic);
         }
 
@@ -116,9 +115,8 @@ public class InteractionManager : MonoBehaviour {
     public void AnimationEnded()
     {
         RestoreInteraction();
-
+        mainCamera.transform.parent = null;
     }
-
 
     public void ForceNoInteraction()
     {
@@ -129,6 +127,5 @@ public class InteractionManager : MonoBehaviour {
     public void RestoreInteraction()
     {
         canInteract = true;
-        cameraPanEnabled = true;
     }
 }

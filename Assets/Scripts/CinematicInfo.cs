@@ -23,11 +23,12 @@ public class CinematicInfo : object
         {
             animator.SetTrigger(trigger);
         }
-        cam.transform.parent = splineController.transform;
-        cam.transform.localPosition = Vector3.zero;
-        cam.transform.localRotation = Quaternion.identity;
-        //splineController.OnAnimationEnd.AddListener(InteractionManager.AnimationEnded);
+        Transform camParent = cam.transform.parent.transform;
+        camParent.parent = splineController.transform;
+        camParent.localPosition = Vector3.zero;
+        camParent.localRotation = Quaternion.identity;
 
+        splineController.Position = 0;
         splineController.Play();
     }
 

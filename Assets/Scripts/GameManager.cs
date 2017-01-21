@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -52,11 +53,14 @@ public class GameManager : MonoBehaviour {
     public Scene startScene;
 
     private Camera mainCamera;
-
+    private InteractionManager interactionManager;
     private CinematicInfo currentCinematic = null;
+    private Queue<CinematicInfo> cinematicQueue = new Queue<CinematicInfo>();
+
 
     private void Start()
     {
+        interactionManager = FindObjectOfType<InteractionManager>();
         mainCamera = FindObjectOfType<Camera>();
         for (int i = 0; i < sceneInfoArray.Length; i++)
         {
@@ -69,13 +73,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void Update()
+    {
+        if(currentCinematic == null && cinematicQueue.Count > 0)
+        {
+            StartCoroutine(StartCinematic(cinematicQueue.Dequeue()));
+        }
+        
+    }
+
     public void PlayCinematic(CinematicInfo cinematic)
-    {   
-        StartCoroutine(StartCinematic(cinematic));
+    {
+        cinematicQueue.Enqueue(cinematic);
     }
 
     IEnumerator StartCinematic(CinematicInfo cinematic)
     {
+        currentCinematic = cinematic;
+        interactionManager.CameraPanEnabled = false;
         float elapsedTime = 0;
         if(cinematic.splineController != null)
         {
@@ -91,9 +106,10 @@ public class GameManager : MonoBehaviour {
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+        
+            //cinematic.splineController.OnAnimationEnd.AddListener(AnimationEnded);
+            cinematic.StartAnimation(mainCamera);
         }
-        currentCinematic = cinematic;
-        cinematic.StartAnimation(mainCamera);
         elapsedTime = 0;
         while (elapsedTime < currentCinematic.duration)
         {
@@ -105,6 +121,8 @@ public class GameManager : MonoBehaviour {
 
     public void AnimationEnded()
     {
-
+       // currentCinematic.splineController.Refresh();
+        currentCinematic = null;
+        interactionManager.CameraPanEnabled = true;
     }
 }
