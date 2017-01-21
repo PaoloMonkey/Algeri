@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Prop : MonoBehaviour {
+public class Prop : MonoBehaviour
+{
+    public bool active;
+    public Cinematic cinematic;
+    private float elapsedTime = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void StartAnimation()
+    {
+        elapsedTime = 0.0f;
+        cinematic.StartAnimation();
+    }
+
+    public void Update()
+    {
+        elapsedTime += Time.deltaTime;
+    }
+
+    public bool AnimationEnded()
+    {
+        return (elapsedTime > cinematic.duration);
+    }
 }
