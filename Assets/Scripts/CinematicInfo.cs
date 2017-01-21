@@ -27,6 +27,8 @@ public class CinematicInfo : object
         camParent.parent = splineController.transform;
         camParent.localPosition = Vector3.zero;
         camParent.localRotation = Quaternion.identity;
+        cam.transform.localPosition = Vector3.zero;
+        cam.transform.localRotation = Quaternion.identity;
 
         splineController.Position = 0;
         splineController.Play();

@@ -22,8 +22,10 @@ public class InteractionManager : MonoBehaviour {
             cameraPanEnabled = value;
             if(value == true)
             {
-                fixedPos = mainCamera.transform.position;
-                fixedRot = mainCamera.transform.rotation.eulerAngles;
+                //fixedPos = mainCamera.transform.position;
+                //fixedRot = mainCamera.transform.rotation.eulerAngles;
+                fixedPos = Vector3.zero;
+                fixedRot = Vector3.zero;
             }
         }
         get
@@ -40,13 +42,16 @@ public class InteractionManager : MonoBehaviour {
     public Sprite cursorInteractive;
     public Sprite cursorCinematic;
 
+    private float elapsedTime = 0.0f;
+    public float interactionCooldowTime = 2.0f;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         mainCamera = FindObjectOfType<Camera>();
         screenSize = new Vector2(Screen.width, Screen.height);
-        fixedPos = mainCamera.transform.position;
-        fixedRot = mainCamera.transform.localEulerAngles;
+        fixedPos = Vector3.zero;
+        fixedRot = Vector3.zero;
 
         Cursor.visible = false;
     }
@@ -63,13 +68,13 @@ public class InteractionManager : MonoBehaviour {
             newPos.y = fixedPos.y + cameraPan.y * (mousePosition.y - screenSize.y / 2) / screenSize.y;
 
             // change camera pos/rotation
-            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, newPos, 0.1f);
+            mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, newPos, 0.1f);
 
             Vector3 newRot = fixedRot;
             newRot.y = fixedRot.y + cameraRotation.x * (mousePosition.x - screenSize.x / 2) / screenSize.x;
             newRot.x = fixedRot.x - cameraRotation.y * (mousePosition.y - screenSize.y / 2) / screenSize.y;
 
-            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, Quaternion.Euler(newRot), 0.1f);
+            mainCamera.transform.localRotation = Quaternion.Lerp(mainCamera.transform.localRotation, Quaternion.Euler(newRot), 0.1f);
         }
 
         bool isSelectingInteraction = false;
@@ -102,11 +107,21 @@ public class InteractionManager : MonoBehaviour {
 
         if(Input.GetMouseButtonUp(0) && currentProp != null)
         {
-       //     canInteract = false;
+            canInteract = false;
             gameManager.PlayCinematic(currentProp.cinematic);
+            elapsedTime = 0.0f;
         }
 
-      /*  if(!canInteract && currentProp != null &&  currentProp.AnimationEnded())
+        if (!canInteract)
+        {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime > interactionCooldowTime)
+            {
+                canInteract = true;
+            }
+        }
+
+       /* if(!canInteract && currentProp != null &&  currentProp.AnimationEnded())
         {
             canInteract = true;
         }*/
@@ -115,7 +130,7 @@ public class InteractionManager : MonoBehaviour {
     public void AnimationEnded()
     {
         RestoreInteraction();
-        mainCamera.transform.parent = null;
+        mainCamera.transform.transform.parent.parent = null;
     }
 
     public void ForceNoInteraction()

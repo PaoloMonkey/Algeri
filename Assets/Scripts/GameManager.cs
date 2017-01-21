@@ -90,20 +90,22 @@ public class GameManager : MonoBehaviour {
     IEnumerator StartCinematic(CinematicInfo cinematic)
     {
         currentCinematic = cinematic;
-        interactionManager.CameraPanEnabled = false;
+    //    interactionManager.CameraPanEnabled = false;
         float elapsedTime = 0;
         if(cinematic.splineController != null)
         {
-            float lerpTime = 2;
-            Vector3 startPos = mainCamera.transform.position;
+            float lerpTime = 5;
+            Transform camParent = mainCamera.transform.parent.transform;
+            Vector3 startPos = camParent.position;
             Vector3 endPos = cinematic.splineController.Spline.ControlPoints[0].position;
-            Quaternion startRot = mainCamera.transform.rotation;
+            Quaternion startRot = camParent.rotation;
             Quaternion edRot = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
             while (elapsedTime < lerpTime)
             {
-                mainCamera.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / lerpTime);
-                mainCamera.transform.rotation = Quaternion.Lerp(startRot, edRot, elapsedTime / lerpTime);
+                camParent.position = Vector3.Lerp(startPos, endPos, elapsedTime / lerpTime);
+                camParent.rotation = Quaternion.Lerp(startRot, edRot, elapsedTime / lerpTime);
                 elapsedTime += Time.deltaTime;
+                //interactionManager.CameraPanEnabled = true;
                 yield return null;
             }
         
@@ -111,8 +113,10 @@ public class GameManager : MonoBehaviour {
             cinematic.StartAnimation(mainCamera);
         }
         elapsedTime = 0;
-        while (elapsedTime < currentCinematic.duration)
+        //while (elapsedTime < currentCinematic.duration)
+        while (currentCinematic != null)
         {
+            //interactionManager.CameraPanEnabled = true;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
