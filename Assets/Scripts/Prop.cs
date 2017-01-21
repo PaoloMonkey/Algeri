@@ -4,5 +4,23 @@ using UnityEngine;
 
 public class Prop : MonoBehaviour
 {
+    public bool active;
     public Cinematic cinematic;
+    private float elapsedTime = 0;
+
+    public void StartAnimation()
+    {
+        elapsedTime = 0.0f;
+        cinematic.StartAnimation();
+    }
+
+    public void Update()
+    {
+        elapsedTime += Time.deltaTime;
+    }
+
+    public bool AnimationEnded()
+    {
+        return (elapsedTime > cinematic.duration);
+    }
 }

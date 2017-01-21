@@ -10,6 +10,7 @@ public class InteractionManager : MonoBehaviour {
     private Vector3 fixedPos;
     private Vector3 fixedRot;
     private Prop currentProp;
+    private bool canInteract = true;
 
     private bool cameraPanEnabled = true;
     public bool CameraPanEnabled
@@ -35,6 +36,7 @@ public class InteractionManager : MonoBehaviour {
     public Image cursor;
     public Sprite cursorNormal;
     public Sprite cursorInteractive;
+    public Sprite cursorCinematic;
 
     private void Awake()
     {
@@ -67,27 +69,44 @@ public class InteractionManager : MonoBehaviour {
             mainCamera.transform.localEulerAngles = newRot;
         }
 
-        bool canInteract = false;
-        RaycastHit vHit = new RaycastHit();
-        Ray vRay = mainCamera.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(vRay, out vHit, 100))
+        bool isSelectingInteraction = false;
+        if (canInteract)
         {
-            currentProp = vHit.collider.gameObject.GetComponent<Prop>();
-            if (currentProp != null)
+            RaycastHit vHit = new RaycastHit();
+            Ray vRay = mainCamera.ScreenPointToRay(mousePosition);
+            if (Physics.Raycast(vRay, out vHit, 100))
             {
-                canInteract = true;
+                currentProp = vHit.collider.gameObject.GetComponent<Prop>();
+                if (currentProp != null && currentProp.active)
+                {
+                    isSelectingInteraction = true;
+                }
             }
         }
 
         cursor.rectTransform.position = mousePosition;
-        if (canInteract)
-            cursor.sprite = cursorInteractive;
+        if(canInteract)
+        {
+            if (isSelectingInteraction)
+                cursor.sprite = cursorInteractive;
+            else
+                cursor.sprite = cursorNormal;
+        }
         else
-            cursor.sprite = cursorNormal;
+        {
+            cursor.sprite = cursorCinematic;
+        }
+        
 
         if(Input.GetMouseButtonUp(0) && currentProp != null)
         {
-            currentProp.cinematic.StartAnimation();
+            canInteract = false;
+            currentProp.StartAnimation();
+        }
+
+        if(!canInteract && currentProp.AnimationEnded())
+        {
+            canInteract = true;
         }
     }
 }
