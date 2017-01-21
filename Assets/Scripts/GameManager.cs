@@ -4,16 +4,53 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public Prop[] allProps;
-    public Prop[] activeProps;
+    public enum Actor
+    {
+        Meursault,
+        Amante,
+        Amico,
+        Vittima,
+        Prete,
+        Avvocato,
+        Infermiera,
+        Guardiano,
+        Prigioniero,
+        Giudice,
+        Uccello
+    }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public enum Location
+    {
+        Prigione,
+        Spiaggia,
+        Tribunale,
+        CameraArdente
+    }
+
+    public enum Scene
+    {
+        Prete,
+        Amante,
+        Avvocato,
+        Amico,
+        Vittima,
+        Veglia,
+        Processo
+    }
+
+    [System.Serializable]
+    public class SceneInfo : object
+    {
+        public string name;
+        public Scene scene;
+        public Location location;
+        public CinematicInfo cinematic;
+    }
+
+    public SceneInfo[] sceneInfoArray;
+
+    public static void PlayCinematic()
+    {
+
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Prop : MonoBehaviour
 {
     public bool active;
-    public Cinematic cinematic;
+    public CinematicInfo cinematic;
     private float elapsedTime = 0;
 
     public void StartAnimation()

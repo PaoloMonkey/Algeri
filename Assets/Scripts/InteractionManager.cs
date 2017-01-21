@@ -96,7 +96,6 @@ public class InteractionManager : MonoBehaviour {
         {
             cursor.sprite = cursorCinematic;
         }
-        
 
         if(Input.GetMouseButtonUp(0) && currentProp != null)
         {
@@ -104,9 +103,20 @@ public class InteractionManager : MonoBehaviour {
             currentProp.StartAnimation();
         }
 
-        if(!canInteract && currentProp.AnimationEnded())
+        if(!canInteract && currentProp != null &&  currentProp.AnimationEnded())
         {
             canInteract = true;
         }
+    }
+
+    public void ForceNoInteraction()
+    {
+        canInteract = false;
+        currentProp = null;
+    }
+
+    public void RestoreInteraction()
+    {
+        canInteract = true;
     }
 }

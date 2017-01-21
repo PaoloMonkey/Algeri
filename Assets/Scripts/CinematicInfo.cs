@@ -2,9 +2,10 @@
 using UnityEngine;
 
 [Serializable]
-public class Cinematic : object
+public class CinematicInfo : object
 {
     // public camera movement
+    public GameManager.Actor actor;
     public AudioSource audioSource;
     public Animator animator;
     public string trigger;

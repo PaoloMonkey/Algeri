@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 0f9916973d3764564be4ad421cb0d381
+timeCreated: 1435197733
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Mesh1
+    100004: guardRail_ext
+    100006: guardRail_int
+    100008: polySurface1
+    100010: Mesh
+    100012: guardRail_ext1
+    100014: guardRail_int1
+    100016: guardRail_1
+    100018: guardRail_2
+    100020: pylon
+    100022: cliff_1
+    100024: cliff_2
+    400000: //RootNode
+    400002: Mesh1
+    400004: guardRail_ext
+    400006: guardRail_int
+    400008: polySurface1
+    400010: Mesh
+    400012: guardRail_ext1
+    400014: guardRail_int1
+    400016: guardRail_1
+    400018: guardRail_2
+    400020: pylon
+    400022: cliff_1
+    400024: cliff_2
+    2300000: Mesh1
+    2300002: guardRail_ext
+    2300004: guardRail_int
+    2300006: polySurface1
+    2300008: Mesh
+    2300010: guardRail_ext1
+    2300012: guardRail_int1
+    2300014: guardRail_1
+    2300016: guardRail_2
+    2300018: pylon
+    2300020: cliff_1
+    2300022: cliff_2
+    3300000: Mesh1
+    3300002: guardRail_ext
+    3300004: guardRail_int
+    3300006: polySurface1
+    3300008: Mesh
+    3300010: guardRail_ext1
+    3300012: guardRail_int1
+    3300014: guardRail_1
+    3300016: guardRail_2
+    3300018: pylon
+    3300020: cliff_1
+    3300022: cliff_2
+    4300000: Mesh1
+    4300002: polySurface1
+    4300004: guardRail_ext
+    4300006: guardRail_int
+    4300008: Mesh
+    4300010: guardRail_ext1
+    4300012: guardRail_int1
+    4300014: guardRail_1
+    4300016: guardRail_2
+    4300018: pylon
+    4300020: cliff_1
+    4300022: cliff_2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 30
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
