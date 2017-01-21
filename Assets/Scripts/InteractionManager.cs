@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using FluffyUnderware.Curvy;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InteractionManager : MonoBehaviour {
 
+    private GameManager gameManager;
     private Camera mainCamera;
     private Vector2 screenSize;
     private Vector3 fixedPos;
@@ -40,6 +42,7 @@ public class InteractionManager : MonoBehaviour {
 
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         mainCamera = FindObjectOfType<Camera>();
         screenSize = new Vector2(Screen.width, Screen.height);
         fixedPos = mainCamera.transform.position;
@@ -100,14 +103,22 @@ public class InteractionManager : MonoBehaviour {
         if(Input.GetMouseButtonUp(0) && currentProp != null)
         {
             canInteract = false;
-            currentProp.StartAnimation();
+            cameraPanEnabled = false;
+            gameManager.PlayCinematic(currentProp.cinematic);
         }
 
-        if(!canInteract && currentProp != null &&  currentProp.AnimationEnded())
+      /*  if(!canInteract && currentProp != null &&  currentProp.AnimationEnded())
         {
             canInteract = true;
-        }
+        }*/
     }
+
+    public void AnimationEnded()
+    {
+        RestoreInteraction();
+
+    }
+
 
     public void ForceNoInteraction()
     {
@@ -118,5 +129,6 @@ public class InteractionManager : MonoBehaviour {
     public void RestoreInteraction()
     {
         canInteract = true;
+        cameraPanEnabled = true;
     }
 }

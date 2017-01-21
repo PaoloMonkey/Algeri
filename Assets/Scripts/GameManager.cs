@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -42,14 +41,69 @@ public class GameManager : MonoBehaviour {
     public class SceneInfo : object
     {
         public string name;
-        public Scene scene;
         public Location location;
+        public Scene scene;
         public CinematicInfo cinematic;
     }
 
     public SceneInfo[] sceneInfoArray;
 
-    public static void PlayCinematic()
+    public Location startLocation;
+    public Scene startScene;
+
+    private Camera mainCamera;
+
+    private CinematicInfo currentCinematic = null;
+
+    private void Start()
+    {
+        mainCamera = FindObjectOfType<Camera>();
+        for (int i = 0; i < sceneInfoArray.Length; i++)
+        {
+            if(sceneInfoArray[i].location == startLocation 
+                && sceneInfoArray[i].scene == startScene)
+            {
+                PlayCinematic(sceneInfoArray[i].cinematic);
+                break;
+            }
+        }
+    }
+
+    public void PlayCinematic(CinematicInfo cinematic)
+    {   
+        StartCoroutine(StartCinematic(cinematic));
+    }
+
+    IEnumerator StartCinematic(CinematicInfo cinematic)
+    {
+        float elapsedTime = 0;
+        if(cinematic.splineController != null)
+        {
+            float lerpTime = 2;
+            Vector3 startPos = mainCamera.transform.position;
+            Vector3 endPos = cinematic.splineController.Spline.ControlPoints[0].position;
+            Quaternion startRot = mainCamera.transform.rotation;
+            Quaternion edRot = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
+            while (elapsedTime < lerpTime)
+            {
+                mainCamera.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / lerpTime);
+                mainCamera.transform.rotation = Quaternion.Lerp(startRot, edRot, elapsedTime / lerpTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+        currentCinematic = cinematic;
+        cinematic.StartAnimation(mainCamera);
+        elapsedTime = 0;
+        while (elapsedTime < currentCinematic.duration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        // cinematic ended
+    }
+
+    public void AnimationEnded()
     {
 
     }
