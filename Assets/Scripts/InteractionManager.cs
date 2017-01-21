@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionManager : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class InteractionManager : MonoBehaviour {
     private Vector2 screenSize;
     private Vector3 fixedPos;
     private Vector3 fixedRot;
+    private Prop currentProp;
 
     private bool cameraPanEnabled = true;
     public bool CameraPanEnabled
@@ -30,8 +32,9 @@ public class InteractionManager : MonoBehaviour {
     public Vector2 cameraPan = Vector2.zero;
     public Vector2 cameraRotation = Vector2.zero;
 
-    public Texture2D cursorNormal;
-    public Texture2D cursorInteractive;
+    public Image cursor;
+    public Sprite cursorNormal;
+    public Sprite cursorInteractive;
 
     private void Awake()
     {
@@ -40,7 +43,7 @@ public class InteractionManager : MonoBehaviour {
         fixedPos = mainCamera.transform.position;
         fixedRot = mainCamera.transform.localEulerAngles;
 
-        Cursor.visible = true;
+        Cursor.visible = false;
     }
 
 	// Update is called once per frame
@@ -69,14 +72,22 @@ public class InteractionManager : MonoBehaviour {
         Ray vRay = mainCamera.ScreenPointToRay(mousePosition);
         if (Physics.Raycast(vRay, out vHit, 100))
         {
-            Prop prop = vHit.collider.gameObject.GetComponent<Prop>();
-            if (prop != null)
-                canInteract = true;        
+            currentProp = vHit.collider.gameObject.GetComponent<Prop>();
+            if (currentProp != null)
+            {
+                canInteract = true;
+            }
         }
-        
-        if(canInteract)
-            Cursor.SetCursor(cursorInteractive, Vector2.zero, CursorMode.Auto);
+
+        cursor.rectTransform.position = mousePosition;
+        if (canInteract)
+            cursor.sprite = cursorInteractive;
         else
-            Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.Auto);
+            cursor.sprite = cursorNormal;
+
+        if(Input.GetMouseButtonUp(0) && currentProp != null)
+        {
+            currentProp.cinematic.StartAnimation();
+        }
     }
 }

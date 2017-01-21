@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public Prop[] props;
+    public Prop[] allProps;
+    public Prop[] activeProps;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
