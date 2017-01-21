@@ -24,8 +24,8 @@ public class InteractionManager : MonoBehaviour {
             {
                 //fixedPos = mainCamera.transform.position;
                 //fixedRot = mainCamera.transform.rotation.eulerAngles;
-                fixedPos = Vector3.zero;
-                fixedRot = Vector3.zero;
+                fixedPos = mainCamera.transform.localPosition;
+                fixedRot = mainCamera.transform.localRotation.eulerAngles;
             }
         }
         get

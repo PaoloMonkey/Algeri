@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public enum Actor
     {
+        Transition,
         Meursault,
         Amante,
         Amico,
@@ -92,33 +93,60 @@ public class GameManager : MonoBehaviour {
         currentCinematic = cinematic;
     //    interactionManager.CameraPanEnabled = false;
         float elapsedTime = 0;
-        if(cinematic.splineController != null)
+        
+        if(cinematic.cameraTransition == CinematicInfo.CameraTransition.Lerp)
         {
-            float lerpTime = 5;
+            float lerpTime = 2;
             Transform camParent = mainCamera.transform.parent.transform;
+
+            Vector3 endPos = Vector3.zero;
+            Quaternion endRot = Quaternion.identity;
+            if (cinematic.splineController != null)
+            {
+                endPos = cinematic.splineController.Spline.ControlPoints[0].position;
+                endRot = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
+            }
+            else if (cinematic.cameraShot != null)
+            {
+                endPos = cinematic.cameraShot.position;
+                endRot = cinematic.cameraShot.rotation;
+            }
             Vector3 startPos = camParent.position;
-            Vector3 endPos = cinematic.splineController.Spline.ControlPoints[0].position;
             Quaternion startRot = camParent.rotation;
-            Quaternion edRot = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
-            while (elapsedTime < lerpTime)
+             
+            while ((endPos-startPos).sqrMagnitude > 0.001f &&  elapsedTime < lerpTime)
             {
                 camParent.position = Vector3.Lerp(startPos, endPos, elapsedTime / lerpTime);
-                camParent.rotation = Quaternion.Lerp(startRot, edRot, elapsedTime / lerpTime);
+                camParent.rotation = Quaternion.Lerp(startRot, endRot, elapsedTime / lerpTime);
                 elapsedTime += Time.deltaTime;
                 //interactionManager.CameraPanEnabled = true;
                 yield return null;
             }
-        
-            //cinematic.splineController.OnAnimationEnd.AddListener(AnimationEnded);
-            cinematic.StartAnimation(mainCamera);
         }
-        elapsedTime = 0;
-        //while (elapsedTime < currentCinematic.duration)
-        while (currentCinematic != null)
+        else if(cinematic.cameraTransition == CinematicInfo.CameraTransition.Cut)
         {
-            //interactionManager.CameraPanEnabled = true;
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            // camParent.position = cinematic.splineController.Spline.ControlPoints[0].position;
+            //  camParent.rotation = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
+        }
+
+        //cinematic.splineController.OnAnimationEnd.AddListener(AnimationEnded);
+        
+        cinematic.StartAnimation(mainCamera);
+
+        elapsedTime = 0;
+        if (cinematic.cameraShot != null)
+        {
+            while (currentCinematic != null)
+            {
+                //interactionManager.CameraPanEnabled = true;
+                elapsedTime += Time.deltaTime;
+                if (elapsedTime > currentCinematic.cameraShotDuration)
+                {
+                    AnimationEnded();
+                    break;
+                }
+                yield return null;
+            }
         }
         // cinematic ended
     }
@@ -127,6 +155,6 @@ public class GameManager : MonoBehaviour {
     {
        // currentCinematic.splineController.Refresh();
         currentCinematic = null;
-        interactionManager.CameraPanEnabled = true;
+     //   interactionManager.CameraPanEnabled = true;
     }
 }
