@@ -6,7 +6,7 @@ public class InteractionManager : MonoBehaviour {
 
     private Camera mainCamera;
     private Vector2 screenSize;
-    private Vector2 fixedPos;
+    private Vector3 fixedPos;
 
     public Vector2 cameraPan = Vector2.zero;
 
@@ -22,6 +22,7 @@ public class InteractionManager : MonoBehaviour {
         Vector2 mousePosition = Input.mousePosition;
 
         // change camera pos/rotation
-        mainCamera.transform.position
-	}
+    //    mainCamera.transform.position = Vector3.Lerp(fixedPos, fixedPos)
+
+    }
 }
