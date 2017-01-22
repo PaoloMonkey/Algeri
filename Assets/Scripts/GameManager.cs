@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour {
     private Queue<CinematicInfo> cinematicQueue = new Queue<CinematicInfo>();
     public float automaticSceneTimer = 60;
 
+    public AudioSource wavesSound;
+
     private void Start()
     {
         interactionManager = FindObjectOfType<InteractionManager>();
@@ -110,6 +112,8 @@ public class GameManager : MonoBehaviour {
         currentCinematic = cinematic;
     //    interactionManager.CameraPanEnabled = false;
         float elapsedTime = 0;
+
+        wavesSound.Play();
 
         if (cinematic.audioSource != null)
             cinematic.audioSource.Play();
