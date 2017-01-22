@@ -206,6 +206,11 @@ public class GameManager : MonoBehaviour {
         Vector3 startPosition = actorTransform.position;
         float duration = (actorTransform.position - target.position).magnitude;
         actorTransform.LookAt(target);
+        if (!cinematic.animator.GetCurrentAnimatorStateInfo(0).IsName("S_IDLE"))
+        {
+            cinematic.animator.SetTrigger("Idle");
+            yield return null;
+        }
         cinematic.animator.SetTrigger("Walk");
         while (elapsedTime < duration)
         {

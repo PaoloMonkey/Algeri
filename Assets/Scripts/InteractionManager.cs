@@ -109,6 +109,7 @@ public class InteractionManager : MonoBehaviour {
         {
             canInteract = false;
             gameManager.PlayCinematic(currentProp.cinematic);
+            currentProp = null;
             elapsedTime = 0.0f;
         }
 
@@ -136,7 +137,6 @@ public class InteractionManager : MonoBehaviour {
     public void ForceNoInteraction()
     {
         canInteract = false;
-        currentProp = null;
     }
 
     public void RestoreInteraction()
