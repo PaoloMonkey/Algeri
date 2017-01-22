@@ -259,17 +259,20 @@ public class GameManager : MonoBehaviour {
         Vector3 startPosition = actorTransform.position;
         float duration = (actorTransform.position - target.position).magnitude;
         actorTransform.LookAt(target);
-        if (!cinematic.animator.GetCurrentAnimatorStateInfo(0).IsName("S_IDLE"))
+        if (cinematic.animator != null)
         {
-            cinematic.animator.SetTrigger("Idle");
-            yield return null;
-        }
-        cinematic.animator.SetTrigger("Walk");
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            actorTransform.position = Vector3.Lerp(startPosition, target.position, elapsedTime/ duration);
-            yield return null;
+            if (!cinematic.animator.GetCurrentAnimatorStateInfo(0).IsName("S_IDLE"))
+            {
+                cinematic.animator.SetTrigger("Idle");
+                yield return null;
+            }
+            cinematic.animator.SetTrigger("Walk");
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                actorTransform.position = Vector3.Lerp(startPosition, target.position, elapsedTime / duration);
+                yield return null;
+            }
         }
         actorTransform.position = target.position;
 
@@ -277,7 +280,8 @@ public class GameManager : MonoBehaviour {
         duration = 1;
         float startRotation = cinematic.actorTransform.localEulerAngles.y;
         float endRotation = target.localEulerAngles.y;
-        cinematic.animator.SetTrigger("Idle");
+        if (cinematic.animator != null)
+            cinematic.animator.SetTrigger("Idle");
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
