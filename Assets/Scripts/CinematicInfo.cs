@@ -17,6 +17,7 @@ public class CinematicInfo : object
     public GameManager.Location toLocation;
     public Transform actorTransform;
     public Transform startPosition;
+    public bool teleportActor;
     public AudioSource audioSource;
     public Animator animator;
     public string trigger;

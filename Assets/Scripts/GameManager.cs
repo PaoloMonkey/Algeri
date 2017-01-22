@@ -120,8 +120,20 @@ public class GameManager : MonoBehaviour {
 
         if (cinematic.actorTransform != null)
         {
-            StartCoroutine(MoveActorAndDo(cinematic));
-           
+            if(cinematic.teleportActor)
+            {
+                if (!cinematic.animator.GetCurrentAnimatorStateInfo(0).IsName("S_IDLE"))
+                {
+                    cinematic.animator.SetTrigger("Idle");
+                    yield return null;
+                }
+                cinematic.animator.SetTrigger(cinematic.trigger);
+                cinematic.actorTransform.position = cinematic.startPosition.position;
+            }
+            else
+            {
+                StartCoroutine(MoveActorAndDo(cinematic));
+            }
         }
 
         if (cinematic.actor == Actor.Transition)
