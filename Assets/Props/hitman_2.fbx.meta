@@ -1,16 +1,61 @@
 fileFormatVersion: 2
-guid: 4330936e26c290b4facab428266d618c
-timeCreated: 1485033787
-licenseType: Free
+guid: 6811707b01ee74deabd00e77d2fe3eec
+timeCreated: 1485082738
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: bowl
-    9500000: //RootNode
+    100000: Camera
+    100002: Group25549
+    100004: Group25579
+    100006: Group25639
+    100008: Group25669
+    100010: Group25684
+    100012: Group25699
+    100014: Group27190
+    100016: Group29281
+    100018: Group8698
+    100020: //RootNode
+    100022: Lamp
+    400000: Camera
+    400002: Group25549
+    400004: Group25579
+    400006: Group25639
+    400008: Group25669
+    400010: Group25684
+    400012: Group25699
+    400014: Group27190
+    400016: Group29281
+    400018: Group8698
+    400020: //RootNode
+    400022: Lamp
+    2300000: Group25549
+    2300002: Group25579
+    2300004: Group25639
+    2300006: Group25669
+    2300008: Group25684
+    2300010: Group25699
+    2300012: Group27190
+    2300014: Group29281
+    2300016: Group8698
+    3300000: Group25549
+    3300002: Group25579
+    3300004: Group25639
+    3300006: Group25669
+    3300008: Group25684
+    3300010: Group25699
+    3300012: Group27190
+    3300014: Group29281
+    3300016: Group8698
+    4300000: Group25639
+    4300002: Group25549
+    4300004: Group27190
+    4300006: Group8698
+    4300008: Group25699
+    4300010: Group25669
+    4300012: Group25579
+    4300014: Group29281
+    4300016: Group25684
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,8 +96,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
@@ -73,7 +118,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

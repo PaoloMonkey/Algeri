@@ -1,16 +1,51 @@
 fileFormatVersion: 2
-guid: 4330936e26c290b4facab428266d618c
-timeCreated: 1485033787
-licenseType: Free
+guid: 630580a5315ae495fa73ca2362da5721
+timeCreated: 1485082737
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: bowl
-    9500000: //RootNode
+    100000: Camera
+    100002: Group12022.001
+    100004: Group38285.001
+    100006: Group38300.001
+    100008: Group38315.001
+    100010: Group5419.001
+    100012: Group64228.001
+    100014: Group6931.001
+    100016: Lamp
+    100018: //RootNode
+    400000: Camera
+    400002: Group12022.001
+    400004: Group38285.001
+    400006: Group38300.001
+    400008: Group38315.001
+    400010: Group5419.001
+    400012: Group64228.001
+    400014: Group6931.001
+    400016: Lamp
+    400018: //RootNode
+    2300000: Group12022.001
+    2300002: Group38285.001
+    2300004: Group38300.001
+    2300006: Group38315.001
+    2300008: Group5419.001
+    2300010: Group64228.001
+    2300012: Group6931.001
+    3300000: Group12022.001
+    3300002: Group38285.001
+    3300004: Group38300.001
+    3300006: Group38315.001
+    3300008: Group5419.001
+    3300010: Group64228.001
+    3300012: Group6931.001
+    4300000: Group38315.001
+    4300002: Group38285.001
+    4300004: Group12022.001
+    4300006: Group6931.001
+    4300008: Group38300.001
+    4300010: Group64228.001
+    4300012: Group5419.001
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,8 +86,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
@@ -73,7 +108,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

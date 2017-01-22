@@ -1,16 +1,41 @@
 fileFormatVersion: 2
-guid: 4330936e26c290b4facab428266d618c
-timeCreated: 1485033787
-licenseType: Free
+guid: 979651d4d131b4331833f586cc4251c7
+timeCreated: 1485082738
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: bowl
-    9500000: //RootNode
+    100000: Camera
+    100002: Group1510
+    100004: Group39393
+    100006: Group52526
+    100008: Group56113
+    100010: Group6509
+    100012: Lamp
+    100014: //RootNode
+    400000: Camera
+    400002: Group1510
+    400004: Group39393
+    400006: Group52526
+    400008: Group56113
+    400010: Group6509
+    400012: Lamp
+    400014: //RootNode
+    2300000: Group1510
+    2300002: Group39393
+    2300004: Group52526
+    2300006: Group56113
+    2300008: Group6509
+    3300000: Group1510
+    3300002: Group39393
+    3300004: Group52526
+    3300006: Group56113
+    3300008: Group6509
+    4300000: Group52526
+    4300002: Group1510
+    4300004: Group6509
+    4300006: Group56113
+    4300008: Group39393
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,8 +76,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
@@ -73,7 +98,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
