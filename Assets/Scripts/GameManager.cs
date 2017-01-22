@@ -180,13 +180,27 @@ public class GameManager : MonoBehaviour {
                 {
                     for(int i = 0; i < locations.Length; i++)
                     {
-                        locations[i].gameObject.SetActive(i == (int)currentCinematic.toLocation);
+                        if(i == (int)currentCinematic.toLocation)
+                        {
+                            locations[i].gameObject.SetActive(true);
+                            var animator = locations[i].parent.gameObject.GetComponent<Animator>();
+                            if(animator != null)
+                            {
+                                animator.SetTrigger("prisonIn");
+                                animator.SetTrigger("morgueIn");
+                            }
+                        }
+                        else
+                        {
+                            locations[i].gameObject.SetActive(false);
+                        }
                     }
                     break;
                 }
                 yield return null;
             }
-        
+
+            
         }
         // cinematic ended
     }
