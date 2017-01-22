@@ -120,21 +120,22 @@ public class GameManager : MonoBehaviour {
                 var animator = locations[i].parent.gameObject.GetComponent<Animator>();
                 if (i == (int)currentCinematic.toLocation)
                 {
-                    locations[i].gameObject.SetActive(true);
-                    if (animator != null)
-                    {
+                    //locations[i].gameObject.SetActive(true);
+                    if (i == (int)Location.Prigione)
                         animator.SetTrigger("prisonIn");
+                    else if (i == (int)Location.CameraArdente)
                         animator.SetTrigger("morgueIn");
-                    }
+                    else if (i == (int)Location.Tribunale)
+                        animator.SetTrigger("tribunalIn");
                 }
                 else
                 {
-                    if (animator != null)
-                    {
+                    if (i == (int)Location.Prigione)
                         animator.SetTrigger("prisonOut");
-                        animator.SetTrigger("morgueout");
-                    }
-                    //locations[i].gameObject.SetActive(false);
+                    else if (i == (int)Location.CameraArdente)
+                        animator.SetTrigger("morgueOut");
+                    else if (i == (int)Location.Tribunale)
+                        animator.SetTrigger("tribunalOut");
                 }
             }
         }
