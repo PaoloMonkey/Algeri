@@ -1,26 +1,45 @@
 fileFormatVersion: 2
-guid: 9015ac6f99a3a8a43b7b5667ae007320
-timeCreated: 1485087964
-licenseType: Free
+guid: 80ef95e6d17554d90a7543430bf9fb5e
+timeCreated: 1485093313
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: girl_01_MeshPart0
-    100004: girl_01_MeshPart1
-    400000: //RootNode
-    400002: girl_01_MeshPart0
-    400004: girl_01_MeshPart1
-    2300000: //RootNode
-    2300002: girl_01_MeshPart0
-    2300004: girl_01_MeshPart1
-    3300000: //RootNode
-    3300002: girl_01_MeshPart0
-    3300004: girl_01_MeshPart1
-    4300000: girl_01
-    4300002: girl_01_MeshPart0
-    4300004: girl_01_MeshPart1
-    9500000: //RootNode
+    100000: Camera
+    100002: Group1510.001
+    100004: Group39393.001
+    100006: Group52526.001
+    100008: Group56113.001
+    100010: Group6509.001
+    100012: Lamp
+    100014: //RootNode
+    100016: www.cadnav.com
+    100018: www.cadnav.com.001
+    400000: Camera
+    400002: Group1510.001
+    400004: Group39393.001
+    400006: Group52526.001
+    400008: Group56113.001
+    400010: Group6509.001
+    400012: Lamp
+    400014: //RootNode
+    400016: www.cadnav.com
+    400018: www.cadnav.com.001
+    2300000: Group1510.001
+    2300002: Group39393.001
+    2300004: Group52526.001
+    2300006: Group56113.001
+    2300008: Group6509.001
+    3300000: Group1510.001
+    3300002: Group39393.001
+    3300004: Group52526.001
+    3300006: Group56113.001
+    3300008: Group6509.001
+    4300000: Group52526.001
+    4300002: Group1510.001
+    4300004: Group6509.001
+    4300006: Group56113.001
+    4300008: Group39393.001
   materials:
     importMaterials: 1
     materialName: 0
@@ -61,8 +80,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
@@ -83,7 +102,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
