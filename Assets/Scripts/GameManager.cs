@@ -199,8 +199,7 @@ public class GameManager : MonoBehaviour {
                 }
                 yield return null;
             }
-
-            
+            AnimationEnded();
         }
         // cinematic ended
     }
