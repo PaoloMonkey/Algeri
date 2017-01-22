@@ -110,7 +110,8 @@ public class GameManager : MonoBehaviour {
            
         }
 
-        
+        if (cinematic.cameraFov == 0)
+            cinematic.cameraFov = mainCamera.fieldOfView;
 
         if (cinematic.cameraTransition == CinematicInfo.CameraTransition.Lerp)
         {
@@ -131,11 +132,14 @@ public class GameManager : MonoBehaviour {
             }
             Vector3 startPos = camParent.position;
             Quaternion startRot = camParent.rotation;
-             
+            float startFov = mainCamera.fieldOfView;
+            float endFov = cinematic.cameraFov; 
+
             while ((endPos-startPos).sqrMagnitude > 0.001f &&  elapsedTime < lerpTime)
             {
                 camParent.position = Vector3.Lerp(startPos, endPos, elapsedTime / lerpTime);
                 camParent.rotation = Quaternion.Lerp(startRot, endRot, elapsedTime / lerpTime);
+                mainCamera.fieldOfView = Mathf.Lerp(startFov, endFov, elapsedTime / lerpTime);
                 elapsedTime += Time.deltaTime;
                 //interactionManager.CameraPanEnabled = true;
                 yield return null;
@@ -143,6 +147,7 @@ public class GameManager : MonoBehaviour {
         }
         else if(cinematic.cameraTransition == CinematicInfo.CameraTransition.Cut)
         {
+            mainCamera.fieldOfView = cinematic.cameraFov;
             // camParent.position = cinematic.splineController.Spline.ControlPoints[0].position;
             //  camParent.rotation = cinematic.splineController.Spline.ControlPoints[0].GetOrientationFast(0);
         }
@@ -224,9 +229,7 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
 
-        
-
-        if (cinematic.animator != null)
+        if (cinematic.animator != null && cinematic.trigger != "")
         {
             cinematic.animator.SetTrigger(cinematic.trigger);
         }

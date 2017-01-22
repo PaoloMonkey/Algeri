@@ -24,6 +24,7 @@ public class CinematicInfo : object
     public SplineController splineController;
     public Transform cameraShot;
     public float cameraShotDuration;
+    public float cameraFov = 60;
 
     public void StartAnimation(Camera cam)
     {
