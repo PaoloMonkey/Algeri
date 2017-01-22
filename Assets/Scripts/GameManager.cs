@@ -55,33 +55,25 @@ public class GameManager : MonoBehaviour {
     public Scene startScene;
 
     public Transform[] locations;
-
+    private Location currentLocation = Location.None;
+    private float locationTimer = 0;
 
     private Camera mainCamera;
     private InteractionManager interactionManager;
     private CinematicInfo currentCinematic = null;
     private Queue<CinematicInfo> cinematicQueue = new Queue<CinematicInfo>();
-
+    public float automaticSceneTimer = 60;
 
     private void Start()
     {
         interactionManager = FindObjectOfType<InteractionManager>();
         mainCamera = FindObjectOfType<Camera>();
+        currentLocation = startLocation;
 
         for (int i = 0; i < locations.Length; i++)
         {
             locations[i].gameObject.SetActive(i == (int)startLocation);
         }
-
-        /* for (int i = 0; i < sceneInfoArray.Length; i++)
-         {
-             if(sceneInfoArray[i].location == startLocation 
-                 && sceneInfoArray[i].scene == startScene)
-             {
-                 PlayCinematic(sceneInfoArray[i].cinematic);
-                 break;
-             }
-         }*/
     }
 
     public void Update()
@@ -90,7 +82,22 @@ public class GameManager : MonoBehaviour {
         {
             StartCoroutine(StartCinematic(cinematicQueue.Dequeue()));
         }
-        
+
+        locationTimer += Time.deltaTime;
+        if(locationTimer > automaticSceneTimer)
+        {
+            locationTimer = -10000;
+
+            for (int i = 0; i < sceneInfoArray.Length; i++)
+            {
+                if (sceneInfoArray[i].location == currentLocation)
+                    //&& sceneInfoArray[i].scene == startScene)
+                {
+                    PlayCinematic(sceneInfoArray[i].cinematic);
+                    break;
+                }
+            }
+        }
     }
 
     public void PlayCinematic(CinematicInfo cinematic)
@@ -112,6 +119,13 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(MoveActorAndDo(cinematic));
            
         }
+
+        if (cinematic.actor == Actor.Transition)
+        {
+            currentLocation = cinematic.toLocation;
+            locationTimer = 0;
+        }
+            
 
         if (cinematic.cameraFov == 0)
             cinematic.cameraFov = mainCamera.fieldOfView;
