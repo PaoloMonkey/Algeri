@@ -104,6 +104,9 @@ public class GameManager : MonoBehaviour {
     //    interactionManager.CameraPanEnabled = false;
         float elapsedTime = 0;
 
+        if (cinematic.audioSource != null)
+            cinematic.audioSource.Play();
+
         if (cinematic.actorTransform != null)
         {
             StartCoroutine(MoveActorAndDo(cinematic));
