@@ -112,6 +112,33 @@ public class GameManager : MonoBehaviour {
 
         if (cinematic.cameraFov == 0)
             cinematic.cameraFov = mainCamera.fieldOfView;
+        
+        if (cinematic.cameraShot != null && cinematic.actor == Actor.Transition)
+        {
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var animator = locations[i].parent.gameObject.GetComponent<Animator>();
+                if (i == (int)currentCinematic.toLocation)
+                {
+                    locations[i].gameObject.SetActive(true);
+                    if (animator != null)
+                    {
+                        animator.SetTrigger("prisonIn");
+                        animator.SetTrigger("morgueIn");
+                    }
+                }
+                else
+                {
+                    if (animator != null)
+                    {
+                        animator.SetTrigger("prisonOut");
+                        animator.SetTrigger("morgueout");
+                    }
+                    //locations[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
 
         if (cinematic.cameraTransition == CinematicInfo.CameraTransition.Lerp)
         {

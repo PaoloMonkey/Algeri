@@ -22,6 +22,7 @@ public class CinematicInfo : object
     public string trigger;
     public CameraTransition cameraTransition;
     public SplineController splineController;
+    public bool invertSpline = false;
     public Transform cameraShot;
     public float cameraShotDuration;
     public float cameraFov = 60;
@@ -38,7 +39,16 @@ public class CinematicInfo : object
             cam.transform.localPosition = Vector3.zero;
             cam.transform.localRotation = Quaternion.identity;
 
-            splineController.Position = 0;
+            if(invertSpline)
+            {
+                splineController.Position = 1;
+                splineController.Clamping = CurvyClamping.PingPong;
+            }
+            else
+            {
+                splineController.Position = 0;
+                splineController.Clamping = CurvyClamping.Clamp;
+            }
             splineController.Play();
         }
         else if (cameraShot != null)
