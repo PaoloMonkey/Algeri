@@ -85,7 +85,7 @@ public class InteractionManager : MonoBehaviour {
             if (Physics.Raycast(vRay, out vHit, 100))
             {
                 currentProp = vHit.collider.gameObject.GetComponent<Prop>();
-                if (currentProp != null && currentProp.active)
+                if (currentProp != null/* && currentProp.active*/)
                 {
                     isSelectingInteraction = true;
                 }
