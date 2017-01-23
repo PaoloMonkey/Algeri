@@ -136,8 +136,10 @@ public class GameManager : MonoBehaviour {
             }
         }
 
+        Location prevLocation = Location.None;
         if (cinematic.actor == Actor.Transition)
         {
+            prevLocation = currentLocation;
             currentLocation = cinematic.toLocation;
             locationTimer = 0;
         }
@@ -160,8 +162,10 @@ public class GameManager : MonoBehaviour {
                         animator.SetTrigger("morgueIn");
                     else if (i == (int)Location.Tribunale)
                         animator.SetTrigger("tribunalIn");
+                    else
+                        locations[i].gameObject.SetActive(true);
                 }
-                else
+                else if (i == (int)prevLocation)
                 {
                     if (i == (int)Location.Prigione)
                         animator.SetTrigger("prisonOut");
@@ -169,6 +173,8 @@ public class GameManager : MonoBehaviour {
                         animator.SetTrigger("morgueOut");
                     else if (i == (int)Location.Tribunale)
                         animator.SetTrigger("tribunalOut");
+                    else
+                        locations[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -226,7 +232,7 @@ public class GameManager : MonoBehaviour {
                 elapsedTime += Time.deltaTime;
                 if (elapsedTime > currentCinematic.cameraShotDuration)
                 {
-                    AnimationEnded();
+                    currentCinematic = null;
                     break;
                 }
                 yield return null;
@@ -245,42 +251,47 @@ public class GameManager : MonoBehaviour {
                         if (i == (int)currentCinematic.toLocation)
                         {
                             locations[i].gameObject.SetActive(true);
-                            if(animator != null)
-                            {
-                                if (i == (int)Location.Prigione)
-                                    animator.SetTrigger("prisonIn");
-                                else if (i == (int)Location.CameraArdente)
-                                    animator.SetTrigger("morgueIn");
-                                else if (i == (int)Location.Tribunale)
-                                    animator.SetTrigger("tribunalIn");
-                            }
+
+                            if (i == (int)Location.Prigione)
+                                animator.SetTrigger("prisonIn");
+                            else if (i == (int)Location.CameraArdente)
+                                animator.SetTrigger("morgueIn");
+                            else if (i == (int)Location.Tribunale)
+                                animator.SetTrigger("tribunalIn");
+                            
+
                         }
-                        else
+                        else if (i == (int)prevLocation)
                         {
-                            if (animator != null)
-                            {
-                                if (i == (int)Location.Prigione)
-                                    animator.SetTrigger("prisonOut");
-                                else if (i == (int)Location.CameraArdente)
-                                    animator.SetTrigger("morgueOut");
-                                else if (i == (int)Location.Tribunale)
-                                    animator.SetTrigger("tribunalOut");
-                            }
+
+
+                            if (i == (int)Location.Prigione)
+                                animator.SetTrigger("prisonOut");
+                            else if (i == (int)Location.CameraArdente)
+                                animator.SetTrigger("morgueOut");
+                            else if (i == (int)Location.Tribunale)
+                                animator.SetTrigger("tribunalOut");
+                            else
+                                locations[i].gameObject.SetActive(false);
+
                         }
                     }
                     break;
                 }
                 yield return null;
             }
-            AnimationEnded();
+            currentCinematic = null;
         }
         // cinematic ended
     }
 
     public void AnimationEnded()
     {
-       // currentCinematic.splineController.Refresh();
-        currentCinematic = null;
+        if (currentCinematic != null && (currentCinematic.cameraShot == null || (currentCinematic.splineController == null || currentCinematic.actor != Actor.Transition)))
+        {
+            currentCinematic = null;
+        }
+            
      //   interactionManager.CameraPanEnabled = true;
     }
 
